@@ -104,6 +104,7 @@ class Config(Schema):
     instructions: Optional[list | str] = None
     send_button_text: Optional[str] = None
     download_button_text: Optional[str] = None
+    missing_field_message: Optional[str] = None
 
     def __post_init__(self):
         """Post initialization method to validate questions."""

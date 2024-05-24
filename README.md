@@ -88,6 +88,7 @@ Below is a minimal *configuration* of the `Parley` software:
   "title": "Your Custom Title",
   "send_button_text": "Custom Submit Text",
   "download_button_text": "Custom Download Text",
+  "missing_field_message": "Custom Missing Field Alert Message",
   "enable_form_download": true,
   "form_backend_url": null,
   "ignore_file_upload": false,
@@ -111,6 +112,7 @@ explained below in more detail (**NOTE**: attributes with a __*__ mark are
 + `title`(__*__): The text that will be set in the **title** element.
 + `send_button_text`: Set custom text for send button (**optional**).
 + `download_button_text`: Set custom text for download buttin (**optional**).
++ `missing_field_message`: Set custom missing field alert text (**optional**).
 + `enable_form_download`: Allow form to be downloaded (**optional**).
 + `form_backend_url`: The (**optional**) form backend URL for submitting forms to.
 + `ignore_file_upload`: When true files will not be uploaded (**optional**).

@@ -577,3 +577,29 @@ def custom_buttons_config() -> Dict[str, Any]:
 
     # updated
     return config
+
+
+@pytest.fixture(scope="function")
+def custom_missing_field_config() -> Dict[str, Any]:
+    """Custom config file fixture for missing field alert message text."""
+    # get base config
+    config = base_custom_config()
+
+    # update form downloads
+    config["enable_form_download"] = True
+
+    # update submit/download button text
+    config["missing_field_message"] = "Custom Missing Field Alert"
+
+    # update questions
+    config["questions"] = [
+        {
+            "label": "Question 1",
+            "name": "q1",
+            "type": "text",
+            "required": True,
+        }
+    ]
+
+    # updated
+    return config

@@ -418,7 +418,7 @@ fetch('config.json')
 
         if (customValidationFailed) {
             console.log("Validation failed.")
-            alert('Please fill out all required fields.');
+            alert(data.missing_field_message || 'Please fill out all required fields.');
             return; // Exit the function without submitting the form
         }
 
@@ -514,7 +514,7 @@ fetch('config.json')
                 });
 
             } else {
-                alert('Please fill out all required fields.');
+                alert(data.missing_field_message || 'Please fill out all required fields.');
             }
         });
 

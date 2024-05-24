@@ -1174,7 +1174,6 @@ def test_no_email(
     sb.save_screenshot_to_logs()
 
 
-@pytest.mark.debug
 @pytest.mark.feature
 def test_custom_button_text(
     sb: BaseCase,
@@ -1218,3 +1217,67 @@ def test_custom_button_text(
     assert (
         download_button.text == expected_download_text
     ), f"Expected {expected_download_text!r} but got '{download_button.text!r}"
+
+
+@pytest.mark.feature
+def test_missing_field_text(
+    sb: BaseCase,
+    live_session_web_app_url: str,
+    custom_missing_field_config: Dict[str, Any],
+) -> None:
+    """Check that the form buttons have the right custom text."""
+    # update config
+    response = requests.post(
+        live_session_web_app_url + "/update_config", json=custom_missing_field_config
+    )
+
+    # check response
+    assert response.status_code == 200
+
+    # get token
+    token = response.json().get("token")
+    assert token is not None
+
+    # update site URL
+    site_url = f"{live_session_web_app_url}?token={token}"
+
+    # open site
+    sb.open(site_url)
+
+    # get form
+    form_element = sb.get_element("form")
+
+    # get send/download buttons ...
+    send_button = form_element.find_element(By.ID, "send_button")
+    download_button = form_element.find_element(By.ID, "download_button")
+
+    # get custom missing field message
+    custom_message = custom_missing_field_config["missing_field_message"]
+
+    # ... now click it
+    send_button.click()
+
+    # switch to the alert and get its text
+    send_alert_text = sb.switch_to_alert().text
+
+    # now accept it
+    sb.accept_alert()
+
+    # make sure alert texts match
+    assert (
+        send_alert_text == custom_message
+    ), f"Expected {custom_message!r} but got {send_alert_text!r}"
+
+    # ... now click it
+    download_button.click()
+
+    # switch to the alert and get its text
+    dwnld_alert_text = sb.switch_to_alert().text
+
+    # now accept it
+    sb.accept_alert()
+
+    # make sure alert texts match
+    assert (
+        dwnld_alert_text == custom_message
+    ), f"Expected {custom_message!r} but got {dwnld_alert_text!r}"
