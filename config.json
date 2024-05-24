@@ -9,6 +9,8 @@
   ],
   "subject": "Your Form Subject",
   "title": "Your Custom Title",
+  "send_button_text": "Custom Submit Text",
+  "download_button_text": "Custom Download Text",
   "enable_form_download": true,
   "form_backend_url": null,
   "ignore_file_upload": true,

@@ -256,7 +256,7 @@ fetch('config.json')
     if (email !== undefined && email !== null) {
       form.setAttribute('action', 'mailto:' + email + '?subject=' + subject);
     }
-    
+
     const formBackendUrl = data.form_backend_url;
     if (formBackendUrl !== undefined && formBackendUrl !== null) {
       // Set form backend URL and enctype if available and not null
@@ -368,7 +368,7 @@ fetch('config.json')
     // Setup form submission button
     const send_button = document.createElement('button');
     send_button.setAttribute('type', 'submit');
-    send_button.textContent = 'Send';
+    send_button.textContent = data.send_button_text || 'Send';
     send_button.setAttribute('id', 'send_button'); // Add id attribute
     form.appendChild(send_button);
 
@@ -435,7 +435,7 @@ fetch('config.json')
     // Setup form download button
     const download_html_button = document.createElement('button');
     download_html_button.setAttribute('type', 'button');
-    download_html_button.textContent = 'Download Form';
+    download_html_button.textContent = data.download_button_text || 'Download';
     download_html_button.setAttribute('id', 'download_button'); // Add id attribute
 
     // Check if data.enable_form_download is true

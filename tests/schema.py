@@ -102,6 +102,8 @@ class Config(Schema):
     form_backend_url: Optional[str] = None
     ignore_file_upload: Optional[bool] = None
     instructions: Optional[list | str] = None
+    send_button_text: Optional[str] = None
+    download_button_text: Optional[str] = None
 
     def __post_init__(self):
         """Post initialization method to validate questions."""

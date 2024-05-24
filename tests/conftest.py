@@ -550,3 +550,30 @@ def missing_email_config() -> Dict[str, Any]:
 
     # updated
     return config
+
+
+@pytest.fixture(scope="function")
+def custom_buttons_config() -> Dict[str, Any]:
+    """Custom config file fixture for button text."""
+    # get base config
+    config = base_custom_config()
+
+    # update form downloads
+    config["enable_form_download"] = True
+
+    # update submit/download button text
+    config["send_button_text"] = "Custom Send Text"
+    config["download_button_text"] = "Custom Download Text"
+
+    # update questions
+    config["questions"] = [
+        {
+            "label": "Question 1",
+            "name": "q1",
+            "type": "text",
+            "required": True,
+        }
+    ]
+
+    # updated
+    return config

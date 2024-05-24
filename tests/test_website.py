@@ -1172,3 +1172,49 @@ def test_no_email(
 
     # save screenshot for confirmation
     sb.save_screenshot_to_logs()
+
+
+@pytest.mark.debug
+@pytest.mark.feature
+def test_custom_button_text(
+    sb: BaseCase,
+    live_session_web_app_url: str,
+    custom_buttons_config: Dict[str, Any],
+) -> None:
+    """Check that the form buttons have the right custom text."""
+    # update config
+    response = requests.post(
+        live_session_web_app_url + "/update_config", json=custom_buttons_config
+    )
+
+    # check response
+    assert response.status_code == 200
+
+    # get token
+    token = response.json().get("token")
+    assert token is not None
+
+    # update site URL
+    site_url = f"{live_session_web_app_url}?token={token}"
+
+    # open site
+    sb.open(site_url)
+
+    # get form
+    form_element = sb.get_element("form")
+
+    # get send/download buttons ...
+    send_button = form_element.find_element(By.ID, "send_button")
+    download_button = form_element.find_element(By.ID, "download_button")
+
+    # get custom text from fixture
+    expected_send_text = custom_buttons_config["send_button_text"]
+    expected_download_text = custom_buttons_config["download_button_text"]
+
+    # check custom text is set
+    assert (
+        send_button.text == expected_send_text
+    ), f"Expected {expected_send_text!r} but got {send_button.text!r}"
+    assert (
+        download_button.text == expected_download_text
+    ), f"Expected {expected_download_text!r} but got '{download_button.text!r}"
