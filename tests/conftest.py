@@ -101,7 +101,7 @@ def write_config_file(config: Dict[str, Any], src_path: Path) -> None:
 
 
 def prepare_default_config(config: Dict[str, Any]) -> Dict[str, Any]:
-    """Update the default config copy with values approprate for testing."""
+    """Update the default config copy with values appropriate for testing."""
     # get port and submit route
     port, submit = get_server_info()
 
@@ -111,18 +111,20 @@ def prepare_default_config(config: Dict[str, Any]) -> Dict[str, Any]:
     # update ignore file uploads
     config["ignore_file_upload"] = False
 
-    # update input[type=file] accept attr
+    # modify certain question types for testing
     for question in config["questions"]:
-        # check type
-        if question["type"] == "file":
-            # check for custom attr
-            if "custom" in question:
-                # only update accept attr
-                question["custom"]["accept"] = "*"
-
-            else:
-                # add custom section with accept attr
-                question["custom"] = {"accept": "*"}
+        match question.get("type"):
+            case "file":
+                # handle file type
+                if "custom" in question:
+                    question["custom"]["accept"] = "*"
+                else:
+                    question["custom"] = {"accept": "*"}
+            case "text" | "textarea":
+                # handle text or textarea types
+                if "custom" in question:
+                    question["custom"].pop("minlength", None)
+                    question["custom"].pop("maxlength", None)
 
     # get updated config data
     return config

@@ -28,11 +28,11 @@
     },
     {
       "label": [
-          "This is a multiline label. It is intended to make it easier to write",
-          "multiline questions and include <i>interesting</i>",
-          "<a href='https://developer.mozilla.org/en-US/docs/Web/HTML'",
-          "target='_blank'>HTML Syntax</a>",
-          "directly in your <i>question text</i>"
+        "This is a multiline label. It is intended to make it easier to write",
+        "multiline questions and include <i>interesting</i>",
+        "<a href='https://developer.mozilla.org/en-US/docs/Web/HTML'",
+        "target='_blank'>HTML Syntax</a>",
+        "directly in your <i>question text</i>"
       ],
       "name": "multiline_html_question",
       "type": "text",
@@ -50,15 +50,15 @@
           "selected": true,
           "disabled": true
         },
-        {"label": "Red", "value": "red"},
-        {"label": "Blue", "value": "blue"},
-        {"label": "Green", "value": "green"},
-        {"label": "Yellow", "value": "yellow"},
-        {"label": "Purple", "value": "purple"},
-        {"label": "Orange", "value": "orange"},
-        {"label": "Pink", "value": "pink"},
-        {"label": "Black", "value": "black"},
-        {"label": "White", "value": "white"}
+        { "label": "Red", "value": "red" },
+        { "label": "Blue", "value": "blue" },
+        { "label": "Green", "value": "green" },
+        { "label": "Yellow", "value": "yellow" },
+        { "label": "Purple", "value": "purple" },
+        { "label": "Orange", "value": "orange" },
+        { "label": "Pink", "value": "pink" },
+        { "label": "Black", "value": "black" },
+        { "label": "White", "value": "white" }
       ],
       "custom": {
         "multiple": true
@@ -98,7 +98,11 @@
       "label": "在历史上的军事战争中，你认为最关键的战略决策是什么",
       "name": "chinese_question",
       "type": "textarea",
-      "required": true
+      "required": true,
+      "custom": {
+        "minlength": 10,
+        "maxlength": 100
+      }
     },
     {
       "label": "Website",
@@ -118,10 +122,10 @@
           "selected": true,
           "disabled": true
         },
-        {"label": "USA", "value": "USA"},
-        {"label": "Canada", "value": "CAN"},
-        {"label": "United Kingdom", "value": "UK"},
-        {"label": "Australia", "value": "AUS"}
+        { "label": "USA", "value": "USA" },
+        { "label": "Canada", "value": "CAN" },
+        { "label": "United Kingdom", "value": "UK" },
+        { "label": "Australia", "value": "AUS" }
       ],
       "custom": {
         "multiple": true
