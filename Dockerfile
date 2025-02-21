@@ -1,10 +1,23 @@
-# get python base image
+# test base image
 FROM python:3.11
+
+# define the build arguments
+ARG DCKRSRC
 
 # install necessary dependencies
 RUN apt-get update \
-    && apt-get install -y wget gnupg unzip \
+    && apt-get install -y \
+      bash \
+      git \
+      gnupg \
+      make \
+      tree \
+      wget \
+      unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Add the safe.directory config for Git
+RUN git config --global --add safe.directory '*'
 
 # download and install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -15,7 +28,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     && rm -rf /var/lib/apt/lists/*
 
 # set workdir
-WORKDIR /usr/local/src/parley
+WORKDIR ${DCKRSRC}
 
 # copy source
 COPY . .

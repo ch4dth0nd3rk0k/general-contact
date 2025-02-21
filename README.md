@@ -215,6 +215,10 @@ invocation of the command, simply run `make -n [COMMAND]` (**NOTE**: this serves
 good way to test a command and see what **exactly** will be executed before running the
 command). Below is the list of the commands and their short descriptions:
 
++ `check-docker`: check Docker and host dependencies
++ `check-image`: check if the Docker image exists
++ `check workdir`: confirm working dir is correct
++ `check-deps`: check dependencies inside Docker
 + `build`: Build the Docker image
 + `serve`: Serve the website
 + `server-container`: Build server container
@@ -222,6 +226,7 @@ command). Below is the list of the commands and their short descriptions:
 + `address`: Get Docker container address/port
 + `stop-server`: Stop the running web server
 + `restart-server`: Restart the running web server
++ `print-config`: print info on variables used
 + `lint`: Run linters
 + `test`: Run full testing suite
 + `pytest`: Run pytest in Docker container
@@ -229,6 +234,9 @@ command). Below is the list of the commands and their short descriptions:
 + `black`: Run black in Docker container
 + `flake8`: Run flake8 in Docker container
 + `mypy`: Run mypy in Docker container
++ `install-act`: install act command
++ `check-act`: check if act is installed
++ `run-act-tests`: run GitHub action tests locally
 + `shell`: Create interactive shell in Docker container
 
 #### Example Uses

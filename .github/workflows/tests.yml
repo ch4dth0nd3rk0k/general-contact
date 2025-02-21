@@ -2,66 +2,37 @@ name: tests
 
 on:
   workflow_run:
-    workflows: ["docker"]
+    workflows:
+      - "docker"
     types:
       - completed
-      - success
-      - failure
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  IMAGE_TAG: master
 
 jobs:
-  build-and-test:
-
+  run-tests:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
 
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Convert repository name to lowercase
-        id: lowercase_repo_name
-        uses: ASzc/change-string-case-action@v6
-        with:
-          string: ${{ env.IMAGE_NAME }}
-
-      # Store lowercase image name in an environment variable
-      - name: Set lowercase image name
-        run: echo "LOWERCASE_IMAGE_NAME=${{ steps.lowercase_repo_name.outputs.lowercase }}" >> $GITHUB_ENV
-
-      # Create environment variable for Docker image name
-      - name: Set image repository name
-        run: echo "IMAGE_REPO_NAME=${{ env.REGISTRY }}/${{ env.LOWERCASE_IMAGE_NAME }}:${{ env.IMAGE_TAG }}" >> $GITHUB_ENV
-
-      # Check if Docker image exists
-      - name: Check if Docker image exists
+      - name: Check GitHub Credentials
         run: |
-          set -e
-          if docker pull "${{ env.IMAGE_REPO_NAME }}"; then
-            echo "Image successfully pulled!"
-            echo "IMAGE_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "::error::Failed to pull the image"
-            echo "IMAGE_EXISTS=false" >> $GITHUB_ENV
-          fi
-        continue-on-error: true
+          echo "Git Remotes: "
+          echo "$(git remote -v)"
+          echo "GITHUB_USER: ${{ github.actor }}"
+          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
+          echo "GITHUB_SHA: ${{ github.sha }}"
+          echo "GITHUB_REF: ${{ github.ref }}"
 
-      # Build Docker image if it doesn't exist
-      - name: Build Docker image if it doesn't exist
-        if: env.IMAGE_EXISTS != 'true'
-        run: |
-          docker build -t ${{ env.IMAGE_REPO_NAME }} .
+      - name: Build Tests Image
+        if: ${{ env.SKIP_BUILD != 'true' }}
+        run: make build
 
-      # Run pytest tests within the Docker container
-      - name: Run pytest in Docker container
-        run: |
-          docker run ${{ env.IMAGE_REPO_NAME }} pytest
+      - name: Check Dependencies
+        run: make check-deps NOTTY=true
+
+      - name: Print Configuration
+        run: make print-config NOTTY=true
+
+      - name: Run Tests
+        run: make tests NOTTY=true USE_VOL=false USE_USR=false

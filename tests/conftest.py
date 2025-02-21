@@ -27,7 +27,10 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "feature: custom marker for form feature tests.")
     config.addinivalue_line("markers", "fixture: custom marker for fixture tests.")
     config.addinivalue_line("markers", "flask: custom marker for flask server tests.")
+    config.addinivalue_line("markers", "git: custom marker for git tests.")
+    config.addinivalue_line("markers", "make: custom marker for Makefile tests.")
     config.addinivalue_line("markers", "schema: custom marker for schema tests.")
+    config.addinivalue_line("markers", "utils: custom marker for utility tests.")
     config.addinivalue_line("markers", "website: custom marker for website tests.")
 
 
