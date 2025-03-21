@@ -1,135 +1,71 @@
 {
   "instructions": [
     "<p>",
-    "Fill out the form below, and click <b>Send</b> to submit it.",
-    "If that should fail, simply click <b>Download Form</b> and manually",
-    "email the completed form to:",
-    "<strong class='email-placeholder'>[Email Address]</strong>.",
+    "Use this form to reach out with any inquiries, feedback, or messages.",
     "</p>"
   ],
-  "subject": "Your Form Subject",
-  "title": "Your Custom Title",
-  "send_button_text": "Custom Submit Text",
-  "download_button_text": "Custom Download Text",
-  "missing_field_message": "Custom Missing Field Alert Message",
-  "enable_form_download": true,
-  "form_backend_url": null,
+  "subject": "New General Form Submission",
+  "title": "General Contact Form",
+  "enable_form_download": false,
+  "form_backend_url": "https://formspree.io/f/xyzeenkd",
   "ignore_file_upload": true,
-  "email": "your_email@example.com",
   "questions": [
     {
-      "label": "Upload funny memes",
-      "name": "meme_imgs",
-      "type": "file",
-      "required": true,
-      "custom": {
-        "multiple": true
-      }
-    },
-    {
-      "label": [
-        "This is a multiline label. It is intended to make it easier to write",
-        "multiline questions and include <i>interesting</i>",
-        "<a href='https://developer.mozilla.org/en-US/docs/Web/HTML'",
-        "target='_blank'>HTML Syntax</a>",
-        "directly in your <i>question text</i>"
-      ],
-      "name": "multiline_html_question",
       "type": "text",
-      "required": false
-    },
-    {
-      "label": "Select your favorite color",
-      "name": "favorite_color",
-      "type": "selectbox",
-      "required": true,
-      "options": [
-        {
-          "label": "--Choose your favorite color(s)--",
-          "value": "",
-          "selected": true,
-          "disabled": true
-        },
-        { "label": "Red", "value": "red" },
-        { "label": "Blue", "value": "blue" },
-        { "label": "Green", "value": "green" },
-        { "label": "Yellow", "value": "yellow" },
-        { "label": "Purple", "value": "purple" },
-        { "label": "Orange", "value": "orange" },
-        { "label": "Pink", "value": "pink" },
-        { "label": "Black", "value": "black" },
-        { "label": "White", "value": "white" }
-      ],
-      "custom": {
-        "multiple": true
-      }
-    },
-    {
-      "label": "имя (Name)",
-      "name": "name",
-      "type": "text",
+      "label": "Full Name",
+      "name": "full_name",
       "required": true
     },
     {
-      "label": "ایمیل (Email)",
-      "name": "email",
       "type": "email",
+      "label": "Email Address",
+      "name": "email_address",
       "required": true
     },
     {
-      "label": "Telephone Number (Optional)",
-      "name": "telephone",
       "type": "tel",
+      "label": "Phone Number (Optional)",
+      "name": "phone_number",
       "required": false
     },
     {
-      "label": "Age",
-      "name": "age",
-      "type": "number",
-      "required": true
-    },
-    {
-      "label": "Appointment Date/Time",
-      "name": "apt_time",
-      "type": "datetime-local",
-      "required": true
-    },
-    {
-      "label": "在历史上的军事战争中，你认为最关键的战略决策是什么",
-      "name": "chinese_question",
-      "type": "textarea",
-      "required": true,
-      "custom": {
-        "minlength": 10,
-        "maxlength": 100
-      }
-    },
-    {
-      "label": "Website",
-      "name": "site_url",
-      "type": "url",
-      "required": true
-    },
-    {
-      "label": "Select your country",
-      "name": "country",
       "type": "selectbox",
-      "required": true,
+      "label": "Reason for Contacting",
+      "name": "contact_reason",
       "options": [
         {
-          "label": "--Select all that apply--",
+          "label": "--Select an option--",
           "value": "",
           "selected": true,
           "disabled": true
         },
-        { "label": "USA", "value": "USA" },
-        { "label": "Canada", "value": "CAN" },
-        { "label": "United Kingdom", "value": "UK" },
-        { "label": "Australia", "value": "AUS" }
+        {"label": "General Inquiry", "value": "inquiry"},
+        {"label": "Feedback", "value": "feedback"},
+        {"label": "Other", "value": "other"}
       ],
-      "custom": {
-        "multiple": true
-      }
+      "required": true
+    },
+    {
+      "type": "textarea",
+      "label": "Your Message",
+      "name": "message",
+      "required": true
+    },
+    {
+      "type": "selectbox",
+      "label": "Would you like a response",
+      "name": "response_requested",
+      "required": true,
+      "options": [
+        {
+          "label": "--Select an option--",
+          "value": "",
+          "selected": true,
+          "disabled": true
+        },
+        {"label": "Yes", "value": "yes"},
+        {"label": "No", "value": "no"}
+      ]
     }
   ]
 }
